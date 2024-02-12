@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\lv\LvController;
+use App\Http\Controllers\google\FirestoreController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,5 +17,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('common/app');
+});
+
+Route::prefix('/lv')->controller(LvController::class)->group(function () {
+    Route::get('/','index');
+});
+
+
+Route::prefix('/payment')->controller(RazorpayController::class)->group(function () {
+    Route::get('/','index');
+    Route::get('/paypal','index');
+    Route::get('/stripe','index');
+    Route::get('/razorpay','index');
+});
+
+Route::prefix('/google')->controller(FirestoreController::class)->group(function () {
+    Route::get('/firestore','index');
+    Route::get('/paypal','index');
+    Route::get('/stripe','index');
+    Route::get('/razorpay','index');
 });
